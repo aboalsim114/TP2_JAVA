@@ -11,14 +11,14 @@ class Test {
 	/**
 	 * Vérifie que le résultat donné d'une expression booléenne est vraie et
 	 * affiche dans la console le bilan de cette vérification.
-	 * @param result le résultat d'une expression booléenne à vérifier
+	 * 
+	 * @param result      le résultat d'une expression booléenne à vérifier
 	 * @param description la description du test
 	 */
 	static void assertTrue(boolean result, String description) {
 		try {
 			throw new AssertionError(description);
-		}
-		catch (AssertionError error) {
+		} catch (AssertionError error) {
 			printResult(result, description);
 		}
 	}
@@ -26,14 +26,14 @@ class Test {
 	/**
 	 * Vérifie que le résultat donné d'une expression booléenne est faux et
 	 * affiche dans la console le bilan de cette vérification.
-	 * @param result le résultat d'une expression booléenne à vérifier
+	 * 
+	 * @param result      le résultat d'une expression booléenne à vérifier
 	 * @param description la description du test
 	 */
 	static void assertFalse(boolean result, String description) {
 		try {
 			throw new AssertionError(description);
-		}
-		catch (AssertionError error) {
+		} catch (AssertionError error) {
 			printResult(!result, description);
 		}
 	}
@@ -50,18 +50,20 @@ class Test {
 	 * classe dont les deux résultats sont instances, ou la méthode "toString"
 	 * sinon.
 	 * 
-	 * @param result le résultat obtenu
+	 * @param result         le résultat obtenu
 	 * @param expectedResult le résultat attendu
-	 * @param description la description du test
+	 * @param description    la description du test
 	 */
 	static void assertEquals(Object result, Object expectedResult, String description) {
 		try {
 			throw new AssertionError(description);
 		} catch (AssertionError error) {
 			// case when both result and expected result are null
-			boolean passed = (result == null && expectedResult == null) || ((result != null) && (expectedResult != null) && equals(result, expectedResult));
+			boolean passed = (result == null && expectedResult == null)
+					|| ((result != null) && (expectedResult != null) && equals(result, expectedResult));
 			if (!passed) {
-				description = description + " (result is " + toString(result) + " but " + toString(expectedResult) + " is expected)";
+				description = description + " (result is " + toString(result) + " but " + toString(expectedResult)
+						+ " is expected)";
 			}
 			printResult(passed, description);
 		}
@@ -79,24 +81,25 @@ class Test {
 	 * classe dont les deux résultats sont instances, ou la méthode "toString"
 	 * sinon.
 	 * 
-	 * @param result le résultat obtenu
+	 * @param result         le résultat obtenu
 	 * @param expectedResult le résultat attendu
-	 * @param description la description du test
+	 * @param description    la description du test
 	 */
 	static void assertNotEquals(Object result, Object expectedResult, String description) {
 		try {
 			throw new AssertionError(description);
-		}
-		catch (AssertionError error) {
+		} catch (AssertionError error) {
 			// case when both result and expected result are null
-			boolean passed = (result == null && expectedResult==null) || ((result != null) && (expectedResult != null) && !equals(result, expectedResult));
+			boolean passed = (result == null && expectedResult == null)
+					|| ((result != null) && (expectedResult != null) && !equals(result, expectedResult));
 			if (!passed) {
-				description = description + " (result is " + toString(result) + " and is equal to " + toString(expectedResult) + ")";
+				description = description + " (result is " + toString(result) + " and is equal to "
+						+ toString(expectedResult) + ")";
 			}
 			printResult(passed, description);
 		}
 	}
-	
+
 	/**
 	 * Vérifie que le résultat obtenu n'est pas nul et afficheString
 	 * dans la console le bilan de cette vérification.
@@ -105,14 +108,13 @@ class Test {
 	 * classe dont les deux résultats sont instances, ou la méthode "toString"
 	 * sinon.
 	 * 
-	 * @param result le résultat obtenu
+	 * @param result      le résultat obtenu
 	 * @param description la description du test
 	 */
 	static void assertNotNull(Object result, String description) {
 		try {
 			throw new AssertionError(description);
-		}
-		catch (AssertionError error) {
+		} catch (AssertionError error) {
 			// case when both result and expected result are null
 			boolean passed = result != null;
 			printResult(passed, description);
@@ -122,7 +124,8 @@ class Test {
 	/**
 	 * Vérifie que l'exécution d'un bloc d'instructions conduit à une erreur et
 	 * affiche dans la console le bilan de cette vérification.
-	 * @param runnable le bloc d'instructions à exécuter
+	 * 
+	 * @param runnable    le bloc d'instructions à exécuter
 	 * @param description la description du test
 	 */
 	static void assertError(Runnable runnable, String description) {
@@ -133,12 +136,13 @@ class Test {
 			printResult(true, description);
 		}
 	}
-	
+
 	/**
-	 * Vérifie que l'exécution d'un bloc d'instructions conduit à une erreur, 
+	 * Vérifie que l'exécution d'un bloc d'instructions conduit à une erreur,
 	 * que le message d'erreur n'est pas le généric fourni dans le sujet et
 	 * affiche dans la console le bilan de cette vérification.
-	 * @param runnable le bloc d'instructions à exécuter
+	 * 
+	 * @param runnable    le bloc d'instructions à exécuter
 	 * @param description la description du test
 	 */
 	static void assertErrorMessageChanged(Runnable runnable, String description) {
@@ -146,107 +150,113 @@ class Test {
 			runnable.run();
 			printResult(false, description);
 		} catch (Error error) {
-			if(!"message d'erreur".equals(error.getMessage())) {
+			if (!"message d'erreur".equals(error.getMessage())) {
 				printResult(true, description);
-			}else {
+			} else {
 				printResult(false, description);
 			}
-		}	
+		}
 	}
-	
+
 	/**
-	 * Vérifie que l'exécution d'un bloc d'instructions ne conduit pas à une erreur et
-	 * affiche dans la console le bilan de cette vérification. Cette méthode vérifie que le
+	 * Vérifie que l'exécution d'un bloc d'instructions ne conduit pas à une erreur
+	 * et
+	 * affiche dans la console le bilan de cette vérification. Cette méthode vérifie
+	 * que le
 	 * code est "protégé" des levées d'exceptions.
-	 * @param runnable le bloc d'instructions à exécuter
+	 * 
+	 * @param runnable    le bloc d'instructions à exécuter
 	 * @param description la description du test
 	 */
 	static void assertNoError(Runnable runnable, String description) {
 		try {
 			runnable.run();
 			printResult(true, description);
-		}
-		catch (Exception exception) {
+		} catch (Exception exception) {
 			printResult(false, description);
 			exception.printStackTrace();
 		}
 	}
-	
+
 	static void assertAttributPresent(String memberName, String type, Class clazz, String description) {
 		try {
 			throw new AssertionError(description);
 		} catch (AssertionError error) {
-			
+
 			// case when both result and expected result are null
-			boolean passed = findField(memberName,type,clazz);
+			boolean passed = findField(memberName, type, clazz);
 			if (!passed) {
 				description = description + " (no member " + memberName + " of type " + type + " found)";
 			}
 			printResult(passed, description);
 		}
 	}
-	
+
 	static void assertConstructeurPresent(int numParam, Class clazz, String description) {
 		try {
 			throw new AssertionError(description);
 		} catch (AssertionError error) {
-			
+
 			// case when both result and expected result are null
-			boolean passed = findConstructor(numParam,clazz);
+			boolean passed = findConstructor(numParam, clazz);
 			if (!passed) {
 				description = description + " (no constructor with " + numParam + " parameters found)";
 			}
 			printResult(passed, description);
 		}
 	}
-	
+
 	static void assertConstructeurParams(String[] params, Class clazz, String description) {
 		try {
 			throw new AssertionError(description);
 		} catch (AssertionError error) {
-			
+
 			// case when both result and expected result are null
-			boolean passed = findConstructorParams(params,clazz);
+			boolean passed = findConstructorParams(params, clazz);
 			if (!passed) {
 				description = description + " (no constructor with given parameters found)";
 			}
 			printResult(passed, description);
 		}
 	}
-	
-	static void assertMethodePresenteNbFixeParams(String methodName, int numParam, String returnType, Class clazz, String description) {
+
+	static void assertMethodePresenteNbFixeParams(String methodName, int numParam, String returnType, Class clazz,
+			String description) {
 		try {
 			throw new AssertionError(description);
 		} catch (AssertionError error) {
-			
+
 			// case when both result and expected result are null
-			boolean passed = findMethod(methodName,numParam,returnType,clazz);
+			boolean passed = findMethod(methodName, numParam, returnType, clazz);
 			if (!passed) {
-				description = description + " (no method " + methodName + " with " + numParam + " parameters and with "+ returnType + " as return type found)";
+				description = description + " (no method " + methodName + " with " + numParam + " parameters and with "
+						+ returnType + " as return type found)";
 			}
 			printResult(passed, description);
 		}
 	}
-	
-	static void assertMethodePresenteNbMinParams(String methodName, int numParam, String returnType, Class clazz, String description) {
+
+	static void assertMethodePresenteNbMinParams(String methodName, int numParam, String returnType, Class clazz,
+			String description) {
 		try {
 			throw new AssertionError(description);
 		} catch (AssertionError error) {
-			
+
 			// case when both result and expected result are null
-			boolean passed = findMethodMin(methodName,numParam,returnType,clazz);
+			boolean passed = findMethodMin(methodName, numParam, returnType, clazz);
 			if (!passed) {
-				description = description + " (no method " + methodName + " with " + numParam + " parameters and with "+ returnType + " as return type found)";
+				description = description + " (no method " + methodName + " with " + numParam + " parameters and with "
+						+ returnType + " as return type found)";
 			}
 			printResult(passed, description);
 		}
 	}
-	
+
 	static void assertNbAttributs(int num, Class clazz, String description) {
 		try {
 			throw new AssertionError(description);
 		} catch (AssertionError error) {
-			
+
 			// case when both result and expected result are null
 			boolean passed = clazz.getDeclaredFields().length == num;
 			if (!passed) {
@@ -265,7 +275,8 @@ class Test {
 			Class<?>[] parameterTypes = { object2.getClass() };
 			Method egale = object1.getClass().getDeclaredMethod("egale", parameterTypes);
 			return (Boolean) egale.invoke(object1, object2);
-		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | ClassCastException e) {
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | ClassCastException e) {
 			return object1.equals(object2);
 		}
 	}
@@ -276,7 +287,8 @@ class Test {
 			return (String) versChaine.invoke(object);
 		} catch (NullPointerException npe) {
 			return "null";
-		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException | ClassCastException e) {
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException
+				| InvocationTargetException | ClassCastException e) {
 			return object.toString();
 		}
 	}
@@ -297,11 +309,11 @@ class Test {
 			}
 		}
 		// DO NOT CLOSE this stream of it will close System.out and System.err...
-		PrintStream stream = (passed?System.out:System.err);
+		PrintStream stream = (passed ? System.out : System.err);
 		StackTraceElement trace = stack[index];
-		stream.printf("%s : %d : %s : %s\n",trace.getFileName(),
+		stream.printf("%s : %d : %s : %s\n", trace.getFileName(),
 				trace.getLineNumber(),
-				(passed?"passed":"error"),
+				(passed ? "passed" : "error"),
 				message);
 		stream.flush();
 		try {
@@ -311,52 +323,57 @@ class Test {
 		}
 		testCount++;
 	}
-	
+
 	static boolean findField(String name, String type, Class clazz) {
 		boolean found = false;
 		try {
-			found = Arrays.asList(clazz.getDeclaredFields()).stream().anyMatch(f -> f.getName().equals(name) && f.getType().getSimpleName().equals(type));
+			found = Arrays.asList(clazz.getDeclaredFields()).stream()
+					.anyMatch(f -> f.getName().equals(name) && f.getType().getSimpleName().equals(type));
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
 		return found;
 	}
-	
+
 	static boolean findConstructor(int numParams, Class clazz) {
 		boolean found = false;
 		try {
-			found = Arrays.asList(clazz.getDeclaredConstructors()).stream().anyMatch(c -> c.getParameterCount() == numParams);
+			found = Arrays.asList(clazz.getDeclaredConstructors()).stream()
+					.anyMatch(c -> c.getParameterCount() == numParams);
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
 		return found;
 	}
-	
+
 	private static boolean findConstructorParams(String[] params, Class clazz) {
-		List<Constructor> constructors = Arrays.asList(clazz.getDeclaredConstructors()); 
+		List<Constructor> constructors = Arrays.asList(clazz.getDeclaredConstructors());
 		boolean found = true && !constructors.isEmpty();
 		for (Constructor constructor : clazz.getDeclaredConstructors()) {
-			List<String> parameters = Arrays.asList(constructor.getParameterTypes()).stream().map((p)->p.getSimpleName()).collect(Collectors.toList());
+			List<String> parameters = Arrays.asList(constructor.getParameterTypes()).stream()
+					.map((p) -> p.getSimpleName()).collect(Collectors.toList());
 			List<String> inParams = Arrays.asList(params);
-			found &= parameters.size()==inParams.size() && parameters.containsAll(inParams);
+			found &= parameters.size() == inParams.size() && parameters.containsAll(inParams);
 		}
 		return found;
 	}
-	
+
 	static boolean findMethod(String methodName, int numParams, String returnType, Class clazz) {
 		boolean found = false;
 		try {
-			found = Arrays.asList(clazz.getDeclaredMethods()).stream().anyMatch(m -> m.getName().equals(methodName) && m.getParameterCount() == numParams && m.getReturnType().getSimpleName().equals(returnType));
+			found = Arrays.asList(clazz.getDeclaredMethods()).stream().anyMatch(m -> m.getName().equals(methodName)
+					&& m.getParameterCount() == numParams && m.getReturnType().getSimpleName().equals(returnType));
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}
 		return found;
 	}
-	
+
 	static boolean findMethodMin(String methodName, int numParams, String returnType, Class clazz) {
 		boolean found = false;
 		try {
-			found = Arrays.asList(clazz.getDeclaredMethods()).stream().anyMatch(m -> m.getName().equals(methodName) && m.getParameterCount() >= numParams && m.getReturnType().getSimpleName().equals(returnType));
+			found = Arrays.asList(clazz.getDeclaredMethods()).stream().anyMatch(m -> m.getName().equals(methodName)
+					&& m.getParameterCount() >= numParams && m.getReturnType().getSimpleName().equals(returnType));
 		} catch (SecurityException e) {
 			e.printStackTrace();
 		}

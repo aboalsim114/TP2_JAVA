@@ -6,7 +6,8 @@ class TestLivreRepresentationTextuelle {
 	}
 
 	void testeVersChaine() {
-		Livre l = new Livre(5,"Histoire",3);
+		Livre l = new Livre(5, "Histoire", 3);
 		Test.assertEquals(l.versChaine(), "poids:5 - ep.:3 (Histoire)", "Livre - représentation textuelle");
 	}
+
 }
